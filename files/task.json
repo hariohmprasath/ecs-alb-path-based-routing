@@ -1,0 +1,42 @@
+{    
+    "containerDefinitions": [
+        {
+            "name": "Fargate-Container",
+            "image": "893703045818.dkr.ecr.us-west-2.amazonaws.com/scan-repo:latest",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "containerPort": 80,
+                    "hostPort": 80,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "CODE_URL",
+                    "value": "https://git-codecommit.us-west-2.amazonaws.com/v1/repos/test-repo"
+                }
+            ],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/Fargate-Task",
+                    "awslogs-region": "us-west-2",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            }
+        }
+    ],
+    "family": "Fargate-Task",
+    "taskRoleArn": "arn:aws:iam::893703045818:role/Fargate-Scan",
+    "executionRoleArn": "arn:aws:iam::893703045818:role/AmazonCdkS3FullAccess",
+    "networkMode": "awsvpc",            
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "2048",
+    "memory": "4096"
+}

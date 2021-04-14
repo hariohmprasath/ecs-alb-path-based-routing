@@ -1,0 +1,31 @@
+{                
+    "loadBalancers": [
+        {
+            "targetGroupArn": "arn:aws:elasticloadbalancing:us-west-2:893703045818:targetgroup/CLITargetGroup/33ad067c22ac7ed0",
+            "containerName": "Fargate-Container",
+            "containerPort": 80
+        }
+    ],            
+    "desiredCount": 1,
+    "launchType": "FARGATE",
+    "platformVersion": "LATEST",
+    "taskDefinition": "arn:aws:ecs:us-west-2:893703045818:task-definition/Fargate-Task:3",
+    "deploymentConfiguration": {
+        "maximumPercent": 200,
+        "minimumHealthyPercent": 100
+    },    
+    "networkConfiguration": {
+        "awsvpcConfiguration": {
+            "subnets": [
+                "subnet-04fbff9018734eb20",
+                "subnet-03febac40f2dfbcae"
+            ],
+            "securityGroups": [
+                "sg-01a8fc2022ccc0feb"
+            ],
+            "assignPublicIp": "ENABLED"
+        }
+    },
+    "healthCheckGracePeriodSeconds": 0,
+    "schedulingStrategy": "REPLICA"            
+}
